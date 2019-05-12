@@ -1,0 +1,151 @@
+:root{
+  --colorbleu:#34495e;
+}
+/* bree-serif-regular - latin_latin-ext */
+@font-face {
+  font-family: 'Bree Serif';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/bree-serif-v8-latin_latin-ext-regular.eot'); /* IE9 Compat Modes */
+  src: local('Bree Serif Regular'), local('BreeSerif-Regular'),
+       url('../fonts/bree-serif-v8-latin_latin-ext-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/bree-serif-v8-latin_latin-ext-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/bree-serif-v8-latin_latin-ext-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/bree-serif-v8-latin_latin-ext-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/bree-serif-v8-latin_latin-ext-regular.svg#BreeSerif') format('svg'); /* Legacy iOS */
+}
+*{
+margin: 0px;
+padding: 0px;
+font-family:'Bree Serif' , sans-serif;
+}
+html{
+  height: 100%;
+}
+body{
+  height: 100%;
+  background-color: #e7eaec;
+}
+.page{
+  display: flex;
+  justify-content: flex-start;
+  min-height: 100%;
+  width: 100%;
+}
+.detail{
+  width: inherit;
+  height: 100%;
+}
+.titre_bar{
+  background-color: white;
+  padding: 2px;
+}
+.titre_bar_label{
+  display: grid;
+  grid-template-columns: 48px auto;
+  grid-column-gap: 8px;
+  font-size: 28px;
+  margin-left: 8px;
+}
+.barrecherche{
+  display: flex;
+}
+.btn_remove_all{
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+.barrecherche input{
+  border: 1px solid var(--colorbleu);
+  font-size: 22px;
+  width: 300px;
+  padding: 6px;
+  border-radius: 8px 0px 0px 8px;
+}
+.barrecherche button{
+  background-color: var(--colorbleu);
+  border:0;
+  padding: 4px;
+  border-radius: 0px 8px 8px 0px;
+}
+
+/* table  */
+.table{
+  border-top: 3px solid #26A65B;
+  margin:16px;
+  margin-top :16px;
+  background-color: white;
+}
+.bartable{
+  padding: 4px;
+  border-bottom: 1px solid black;
+}
+.barrecherche{
+  padding: 16px;
+}
+.infotable{
+  border-collapse: collapse;
+  text-align: left;
+  width: 100%;
+}
+.infotable tbody tr:hover{
+    background-color: #f4f4f4;
+}
+.infotable td,.infotable th{
+  padding: 16px;
+}
+.infotable tr{
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+/* btn table modifie supprime */
+.produitbtn{
+    color: white;
+    text-decoration: none;
+    padding: 6px;
+    border-radius: 8px;
+    width: 40px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+.produitbtnedit{
+  background-color: #1f3853;
+}
+.produitbtnsupprime{
+  background-color: #f35958;
+}
+.produitbtn_bon_charge{
+  background-color: #17a599;
+}
+.produitbtn_bon_commande{
+background-color: #bec244;
+}
+/* bar page*/
+.suivprec img{
+  height: 16px;
+}
+.itemactiv{
+  background-color:  #34495e;
+  border-radius: 9px;
+  color: white;
+}
+.listitem a{
+  color: black;
+  text-decoration: none;
+}
+.itemactiv a{
+  text-decoration: none;
+  color: white;
+}
+.tableinfo{
+  padding: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+.tableinfo ul{
+  list-style: none;
+  display: flex;
+}
+.tableinfo ul li{
+  padding: 8px;
+}

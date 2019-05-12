@@ -1,0 +1,47 @@
+
+<input type="checkbox" id="sidebarcheckbox"/> <!-- NavBar.html lable-->
+<script src="js/SideBar.js"></script>
+<div class="sidebar" id="sidebar" onmouseover="Sidegrande()" onmouseout="SideMini()">
+  <div class="sidebarlogo">
+
+  </div>
+  <div class="sidebaruserinfo" id="sidebaruserinfo">
+    <?php  if(isset($_SESSION["nomprenom"])){
+      echo $_SESSION["nomprenom"];
+    }else{
+      echo   "user info";
+    }?>
+  </div>
+  <div class="sidebarlistitem">
+    <a href="index.php" class="sidebaritem">
+      <div>
+        <img src="img/icon/HomeWhite32px.png" alt="">
+        <label for="">Accueil</label>
+      </div>
+    </a>
+    <a href="Vendeur.php" class="sidebaritem">
+      <div>
+        <img src="img/icon/clientxwhite32px.png" alt="">
+        <label for="">Vendeur</label>
+      </div>
+    </a>
+    <a href="Produit.php" class="sidebaritem">
+      <div>
+        <img src="img/icon/bottlewhite32px.png" alt="">
+        <label for="">Produit</label>
+      </div>
+    </a>
+    <a href="ProduitPrixType.php" class="sidebaritem">
+      <div>
+        <img src="img/icon/ProduitPrixType32px.png" alt="">
+        <label for="">Offres</label>
+      </div>
+    </a>
+    <a href="Vehicule.php" class="sidebaritem">
+      <div>
+        <img src="img/icon/camionwhite32px.png" alt="">
+        <label for="">Vehicule</label>
+      </div>
+    </a>
+  </div>
+</div>

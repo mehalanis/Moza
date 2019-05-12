@@ -1,0 +1,42 @@
+.index{
+  margin-top: 20px;
+}
+.list_item{
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 22% 22% 22% 22% ;
+  grid-column-gap: 24px;
+  padding: 8px;
+}
+.item_page{
+  display: grid;
+  grid-template-columns: 32% 70%;
+  background-color: white;
+  border: 3px solid var(--colorbleu);
+  border-radius: 4px;
+}
+.item_page_a{
+  text-decoration: none;
+}
+.item_page_titre{
+  display: table;
+  text-align: center;
+  font-size: 40px;
+  color: var(--colorbleu);
+}
+.item_page_titre label{
+  display: table-cell;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.item_page_icon{
+  background-color: var(--colorbleu);
+  display: table;
+  text-align: center;
+  padding: 4px;
+}
+.item_page_icon img{
+  display:table-cell;
+  vertical-align: middle;
+}

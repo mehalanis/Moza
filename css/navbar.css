@@ -1,0 +1,19 @@
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  background-color:  #34495e;
+}
+.navbarbtnmenu{
+  padding:8px;
+  margin-left: 4px;
+  width: 32px;
+  cursor: pointer;
+}
+.navbarbtnexit{
+	background: none;
+	border: none;
+}
+.btnmenu{
+	margin-top: 10px;
+	margin-right: 24px;
+}
