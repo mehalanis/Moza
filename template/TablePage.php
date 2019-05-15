@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<?php 
+<?php
 include 'php/Standard.php';
+require 'php/database.inc';
+require 'php/VerifierUser.php';
 ?>
 <html lang="en" dir="ltr">
   <head>
@@ -36,12 +38,13 @@ include 'php/Standard.php';
             <table class="infotable">
               <thead>
                 <tr>
-                  <th><input type="checkbox" name=""></th>
+                  <th><input width="15" type="checkbox" id="checkbox_all" onclick="SelecteAll()" name=""></th>
                   <th>titre test</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
+                  <td><input type="checkbox" class="remove_list" value="id" name="Delete[]"/></td>
                   <td>Test Value</td>
                 </tr>
               </tbody>
@@ -49,7 +52,7 @@ include 'php/Standard.php';
             <div class="tableinfo">
               <ul class="listinfo">
                 <?php
-                  //$Table->bar();
+                  //TableBar($page,"Vendeur.php",$_GET,$sql);
                 ?>
               </ul>
             </div>

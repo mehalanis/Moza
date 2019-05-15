@@ -9,10 +9,10 @@ $database=new database();
 require 'php/VerifierUser.php';
 if((isset($_POST["AjouteProduit"]))||(isset($_POST["ModifierProduit"]))){
   if (isset($_POST["AjouteProduit"])) {
-    $result=$database->query("insert into produit(nom) values ('".$_POST["NomProduit"]."')");
+    $result=$database->query("insert into produit(id_produit_marge,nom) values (".$_POST["id_produit_marge"].",'".$_POST["NomProduit"]."')");
     $idproduit=$database->insertid($result);
   }else{
-     $database->query("update produit set nom='".$_POST["NomProduit"]."' where id_produit=".$_POST["id_produit"]);
+     $database->query("update produit set nom='".$_POST["NomProduit"]."' , id_produit_marge=".$_POST["id_produit_marge"]." where id_produit=".$_POST["id_produit"]);
      $idproduit=$_POST["id_produit"];
   }
   $date=date("Y/m/d");
@@ -28,6 +28,7 @@ if(isset($_GET["idproduit"])){
 $result=$database->query("select * from produit where id_produit=".$_GET["idproduit"]);
 $produit=mysqli_fetch_assoc($result);
 $nomproduit=$produit["nom"];
+$id_produit_marge=$produit["id_produit_marge"];
 $result=$database->query("select  id_produit_prix,produit_prix_type.id_produit_prix_type as id_produit_prix_type, produit_prix_type.nom
                           as nom,prix,date from produit_prix_type left join produit_prix
                           on  produit_prix_type.id_produit_prix_type=produit_prix.id_produit_prix_type
@@ -77,6 +78,21 @@ while ($row=mysqli_fetch_assoc($result)) {
                   <label class="controllabel" for="" >Nom</label>
                   <input type="text" id="nom" name="NomProduit" value="<?php if(isset($nomproduit)) echo $nomproduit; ?>" class="controlinput">
                 </div>
+                <div class="control_table_item">
+                    <label for="" class="controllabel">Marge</label>
+                    <select name="id_produit_marge" class="controlinput" >
+                      <?php
+                      $result =$database->query("select * from produit_marge");
+                      while ($row=mysqli_fetch_assoc($result)) {
+                        if($row["id_produit_marge"]==$id_produit_marge){
+                          echo "<option value=\"".$row["id_produit_marge"]."\" selected>".$row["nom"]."</option>";
+                        }else{
+                          echo "<option value=\"".$row["id_produit_marge"]."\" >".$row["nom"]."</option>";
+                        }
+                      }
+                       ?>
+                    </select>
+                </div>
               </div>
             </fieldset>
             <fieldset class="fields">
@@ -103,7 +119,7 @@ while ($row=mysqli_fetch_assoc($result)) {
            </div>
            <hr>
            <div class="control_div_btn">
-             <?php if(isset($_GET["idproduit"])) $opetation= "Modifier"; else $opetation= "Ajoute"; ?>
+             <?php if(isset($_GET["idproduit"])) $opetation= "Modifier"; else $opetation= "Ajouter"; ?>
              <input type="hidden" name="id_produit" value="<?php if(isset($_GET["idproduit"])) echo $_GET["idproduit"]; ?>">
              <button type="submit" class="control_btn" name="<?php echo $opetation; ?>Produit">
                <?php echo $opetation; ?>

@@ -149,3 +149,13 @@ background-color: #bec244;
 .tableinfo ul li{
   padding: 8px;
 }
+
+/* alerte */
+
+.AlertConfirme{
+  border: 1px solid #0aa699;
+  border-radius: 8px;
+  background-color: #0aa6991a;
+  color: #333;
+  padding: 8px;
+}

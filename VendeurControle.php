@@ -10,6 +10,9 @@ require 'php/VerifierUser.php';
 if(isset($_GET["PDF"])){
   header("location: BonEcartePDF.php?idVendeur=".$_GET["idVendeur"]."&depart=".$_GET["depart"]."&jusque=".$_GET["jusque"]."");
 }
+if(isset($_GET["MargePDF"])){
+  header("location: BonMargePDF.php?idVendeur=".$_GET["idVendeur"]."&depart=".$_GET["depart"]."&jusque=".$_GET["jusque"]."");
+}
 if(isset($_POST["ModifierVendeur"])){
   $result=$database->query("update vendeur set nom='".$_POST["VendeurNom"]."' , prenom='".$_POST["VendeurPrenom"]."' ,
     telephone='".$_POST["VendeurTelephone"]."' , id_vehicule=".$_POST["VendeurVehicule"]." where id_vendeur=".$_POST["IdVendeur"]);
@@ -34,19 +37,21 @@ $vendeur=new Vendeur($row["idVendeur"],new Vehicule($row["idvehicule"],$row["Veh
  $debut=$page*10-10;
  $where="";
  if(!empty($_GET["depart"])&&!empty($_GET["jusque"])){
-   $where="and premier_bon.date BETWEEN '".$_GET["depart"]."' and '".$_GET["jusque"]."'";
+   $where="and journee.date BETWEEN '".$_GET["depart"]."' and '".$_GET["jusque"]."'";
  }
- $sql="select premier_bon.id_commande as idcommande,DATE_FORMAT(premier_bon.date,'%d/%m/%Y') as date
- ,sum(prix*qte_vendue) as facture ,recette ,(recette -sum(prix*qte_vendue)) as ecart from commande_detail
-join produit_prix on commande_detail.id_produit_prix=produit_prix.id_produit_prix
-join premier_bon on commande_detail.id_commande=premier_bon.id_commande
-where id_vendeur=".$vendeur->id." $where group by commande_detail.id_commande order by premier_bon.date DESC";
+ $sql="select journee.id_journee as idjournee,sum(qte_vendue_dd*dd.prix+qte_vendue_dg*dg.prix+qte_vendue_sg*sg.prix) as facture ,recette
+,recette-sum(qte_vendue_dd*dd.prix+qte_vendue_dg*dg.prix+qte_vendue_sg*sg.prix) as ecart,DATE_FORMAT(journee.date,'%d/%m/%Y') as date from commande_detail
+join produit_prix as dd on commande_detail.id_produit_prix_dd=dd.id_produit_prix
+join produit_prix as dg on commande_detail.id_produit_prix_dg=dg.id_produit_prix
+join produit_prix as sg on commande_detail.id_produit_prix_sg=sg.id_produit_prix
+join journee on commande_detail.id_journee=journee.id_journee
+where id_vendeur=".$vendeur->id."  group by commande_detail.id_journee order by journee.date DESC";
 
  $result=$database->query($sql." limit $debut, 10");
 $statistique=array();
 while ($row=mysqli_fetch_assoc($result)) {
   $som_ecart+=$row["ecart"];
-  $statistique[]=new Statistique($row["idcommande"],$row["date"],$row['facture'],$row["recette"],$row["ecart"]);
+  $statistique[]=new Statistique($row["idjournee"],$row["date"],$row['facture'],$row["recette"],$row["ecart"]);
 }
 }
 ?>
@@ -77,8 +82,8 @@ while ($row=mysqli_fetch_assoc($result)) {
               <div class="nav_tab_item"  id="Information_label">
                 <label onclick="Tab('Information')" for="">Information</label>
               </div>
-              <div class="nav_tab_item" id="Statistique_label">
-                <label onclick="Tab('Statistique')" for="">Statistique</label>
+              <div class="nav_tab_item" id="journee_label">
+                <label onclick="Tab('journee')" for="">journée</label>
               </div>
             </div>
           <?php endif; ?>
@@ -135,13 +140,13 @@ while ($row=mysqli_fetch_assoc($result)) {
              </div>
             </form>
           </div>
-          <div id="Statistique_div" class="nav_tab_div">
+          <div id="journee_div" class="nav_tab_div">
             <form class="" action="VendeurControle.php" method="GET">
               <div class="left_tab">
                 <fieldset class="fields">
                   <legend class="legends">Information sur commande</legend>
                   <div class="control_table">
-                    <div class="control_table_item_6col" >
+                    <div class="control_table_item_7col" >
                       <input type="hidden" name="idVendeur" value="<?php  if(isset($_GET["idVendeur"]))echo $_GET["idVendeur"]; ?>">
                       <label class="controllabel_titre" for="" >Du </label>
                       <input type="date" class="controlinput" name="depart" value="<?php  if(!empty($_GET["depart"])){echo $_GET["depart"];}
@@ -152,7 +157,10 @@ while ($row=mysqli_fetch_assoc($result)) {
                         Recherche
                       </button>
                       <button type="submit" class="control_btn control_btn_rech control_btn_pdf" name="PDF" value="1" >
-                        PDF
+                        Ecart PDF
+                      </button>
+                      <button type="submit" class="control_btn control_btn_rech control_btn_pdf" name="MargePDF" value="1" >
+                        Marge PDF
                       </button>
                     </div>
                   </div>
@@ -161,7 +169,7 @@ while ($row=mysqli_fetch_assoc($result)) {
             </form>
             <div class="left_tab">
               <fieldset class="fields">
-                <legend class="legends">Statistique</legend>
+                <legend class="legends">liste des Bon Journée</legend>
                 <div class="control_table">
                   <table class="infotable info_table_control">
                     <tr>
@@ -180,10 +188,10 @@ while ($row=mysqli_fetch_assoc($result)) {
                               <?php echo $value->ecart; ?>
                         </td>
                         <td>
-                          <a href="BonCommande.php?id_commande=<?php echo $value->id; ?>" class="produitbtn produitbtnedit">
+                          <a href="Bonjournee.php?id_journee=<?php echo $value->id; ?>" class="produitbtn produitbtnedit">
                             Detail
                           </a>
-                          <a href="BonCommandePDF.php?id_commande=<?php echo $value->id; ?>" class="produitbtn produitbtnsupprime">
+                          <a href="BonjourneePDF.php?id_journee=<?php echo $value->id; ?>" class="produitbtn produitbtnsupprime">
                             PDF
                           </a>
                         </td>

@@ -10,12 +10,12 @@ require 'php/StockVehicule.inc';
 $database=new database();
 require 'php/VerifierUser.php';
 if(isset($_POST["Ajoute"])){
- $result=$database->query("insert into premier_bon(id_vendeur,date,recette,etat_commande) values (
-    ".$_POST["id_vendeur"].",'".$_POST["date"]."',0,1)");
+ $result=$database->query("insert into premier_bon(id_vendeur,date,recette) values (
+    ".$_POST["id_vendeur"].",'".$_POST["date"]."',0)");
   $id_commande=$database->insertid($result);
   foreach ($_POST["id_produit_prix"] as $key => $idproduitprix) {
-    $database->query("insert into commande_detail(id_commande,id_produit_prix,qte_initiale,qte_commande,qte_vendue) values
-          ($id_commande,$idproduitprix,".$_POST["qte_init"][$key].",".$_POST["qte_commande"][$key].",0)");  }
+    $database->query("insert into commande_detail(id_commande,id_produit_prix,qte_initiale,qte_sortie,qte_vendue) values
+          ($id_commande,$idproduitprix,".$_POST["qte_init"][$key].",0,0)");  }
   header("location: BonChargePDF.php?id_commande=".$id_commande);
 }
 if(isset($_GET["idVendeur"])){
@@ -89,12 +89,11 @@ while ($row=mysqli_fetch_assoc($result)) {
                   </div>
                     <?php foreach ($StockVehicule as $key => $value): ?>
                       <div class="control_table_item_4col">
-                        <input type="hidden" name="id_stock_vehicule[]" value="<?php echo $value->produit->id; ?>">
                         <label class="controllabel" for="" ><?php echo $value->produit->produitprixtype->nom; ?></label>
                         <input type="hidden" name="id_produit_prix[]" value="<?php  echo $value->produit->id; ?>">
                         <input type="hidden" name="qte_init[]"  value="<?php echo $value->quantite; ?>">
                         <input id="Init-<?php echo $value->produit->id;?>" type="number" disabled  class="controlinput"  value="<?php echo $value->quantite; ?>">
-                        <input id="commande-<?php echo $value->produit->id;?>" min="0"name="qte_commande[]" type="number" onseeking="calcul(<?php echo $value->produit->id;?>,this.value)" onkeyup="calcul(<?php echo $value->produit->id;?>,this.value)" class="controlinput" value="0">
+                        <input id="commande-<?php echo $value->produit->id;?>" min="0" name="qte_commande[]" type="number" onseeking="calcul(<?php echo $value->produit->id;?>,this.value)" onkeyup="calcul(<?php echo $value->produit->id;?>,this.value)" class="controlinput" value="0">
                         <input id="charge-<?php echo $value->produit->id;?>" type="number" disabled    class="controlinput" value="<?php echo $value->quantite; ?>">
                       </div>
                     <?php endforeach; ?>

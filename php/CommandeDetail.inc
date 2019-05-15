@@ -3,14 +3,12 @@ class CommandeDetail {
  public $id;
  public $nomproduit;
  public $qte_initiale;
- public $qte_commande;
  public $qte_sortie;
  public $qte_vendue;
- public function __construct ( $id , $nomproduit , $qte_initiale , $qte_commande , $qte_sortie , $qte_vendue) {
+ public function __construct ( $id , $nomproduit , $qte_initiale  , $qte_sortie , $qte_vendue) {
   $this->id = $id;
   $this->nomproduit = $nomproduit;
   $this->qte_initiale = intval($qte_initiale);
-  $this->qte_commande =intval($qte_commande);
   $this->qte_sortie =intval($qte_sortie);
   $this->qte_vendue = intval($qte_vendue);
  }

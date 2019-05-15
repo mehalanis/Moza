@@ -12,11 +12,11 @@ if(isset($_POST["button"])){
 $result=$database->query("select * from user where email='".$_POST['username']."' and password='".md5($_POST['password'])."'");
 $cpt=0;
 while ($row=mysqli_fetch_assoc($result)) {
-  $cpt++; $id_user=$row['id_user']; $info=$row;
+  $cpt++;  $info=$row;
 }
 
 if($cpt==1){
-  $_SESSION['id_user']=$id_user;
+  $_SESSION['id_user']=$info["id_user"];
   $_SESSION["nomprenom"]=$info["nom"]." ".$info["prenom"];
   $_SESSION['username']=$_POST['username'];
   $_SESSION['password']=md5($_POST['password']);

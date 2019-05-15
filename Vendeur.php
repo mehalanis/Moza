@@ -23,26 +23,9 @@ $sql="select id_vendeur as idVendeur,Vendeur.nom as VendeurNom ,Vendeur.Prenom a
   on Vendeur.id_vehicule=vehicule.id_vehicule $where order by idvehicule ASC ";
 $result=$database->query($sql." limit $debut , 10");
 $listvendeur=array();
-$listbon=array();
 while ($row=mysqli_fetch_assoc($result)) {
   $listvendeur[]=new Vendeur($row["idVendeur"],new Vehicule($row["idvehicule"],$row["VehiculeNom"]
                               ,$row["matricule"],""),$row["VendeurNom"],$row["VendeurPrenom"],$row["telephone"]);
-  $bon=$database->query("select * from premier_bon where id_vendeur=".$row["idVendeur"]." order by id_commande DESC limit 1 ;");
-  if(mysqli_num_rows($result)>0){
-    $rowbon=mysqli_fetch_assoc($bon);
-    if($rowbon["etat_commande"]==1){
-      $item["nom"]="Bon Commande";
-      $item["php"]="BonCommande";
-      $item["id_bon"]=$rowbon["id_commande"];
-    }else{
-      $item["nom"]="Bon Charge";
-      $item["php"]="BonCharge";
-    }
-  }else{
-      $item["nom"]="Bon Charge";
-      $item["php"]="BonCharge";
-  }
-  $listbon[]=$item;
 }
 ?>
 <html lang="en" dir="ltr">
@@ -95,10 +78,8 @@ while ($row=mysqli_fetch_assoc($result)) {
                       <td><?php echo $value->telephone; ?></td>
                       <td><?php echo $value->vehicule->nom; ?></td>
                       <td>
-                        <a href="<?php echo $listbon[$key]["php"]; ?>.php?<?php if($listbon[$key]["nom"]!="Bon Charge"){echo "id_commande=".$listbon[$key]["id_bon"];}
-                        else{echo "idVendeur=".$value->id;}?>" class="produitbtn
-                        <?php if($listbon[$key]["nom"]!="Bon Charge"){echo "produitbtn_bon_commande";}else{echo "produitbtn_bon_charge";} ?>">
-                          <?php echo $listbon[$key]["nom"]; ?>
+                        <a href="BonJournee.php?idVendeur=<?php echo $value->id; ?>" class="produitbtn produitbtn_bon_charge">
+                          journée
                         </a>
                         <a href="VendeurControle.php?idVendeur=<?php echo $value->id; ?>" class="produitbtn produitbtnedit">
                           Detail

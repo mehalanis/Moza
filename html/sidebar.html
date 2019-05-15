@@ -1,7 +1,7 @@
 
 <input type="checkbox" id="sidebarcheckbox"/> <!-- NavBar.html lable-->
 <script src="js/SideBar.js"></script>
-<div class="sidebar" id="sidebar" onmouseover="Sidegrande()" onmouseout="SideMini()">
+<div class="sidebar" id="sidebar" onmouseover="Sidegrande();" onmouseout="SideMini();">
   <div class="sidebarlogo">
 
   </div>
@@ -25,23 +25,46 @@
         <label for="">Vendeur</label>
       </div>
     </a>
-    <a href="Produit.php" class="sidebaritem">
-      <div>
+    <a class="sidebaritem dropdown-btn" onclick="">
+      <div >
         <img src="img/icon/bottlewhite32px.png" alt="">
         <label for="">Produit</label>
       </div>
     </a>
-    <a href="ProduitPrixType.php" class="sidebaritem">
-      <div>
-        <img src="img/icon/ProduitPrixType32px.png" alt="">
-        <label for="">Offres</label>
-      </div>
-    </a>
+    <div class="sidebar_submenu dropdown-container">
+      <ul>
+        <li><a href="Produit.php">Produit</a></li>
+        <li><a href="ProduitPrixType.php">Offres</a></li>
+        <li><a href="ProduitMarge.php">Marge</a></li>
+      </ul>
+    </div>
     <a href="Vehicule.php" class="sidebaritem">
       <div>
         <img src="img/icon/camionwhite32px.png" alt="">
         <label for="">Vehicule</label>
       </div>
     </a>
+	<a href="Parametres.php" class="sidebaritem">
+      <div>
+        <img src="img/icon/setting32px.png" alt="">
+        <label for="">Parametre</label>
+      </div>
+    </a>
   </div>
 </div>
+<script type="text/javascript">
+  var dropdown = document.getElementsByClassName("dropdown-btn");
+  var i;
+
+  for (i = 0; i < dropdown.length; i++) {
+    dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+    dropdownContent.style.display = "none";
+    } else {
+    dropdownContent.style.display = "block";
+    }
+    });
+  }
+</script>

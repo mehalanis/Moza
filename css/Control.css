@@ -26,6 +26,12 @@
   grid-template-columns: auto 200px auto 200px auto 200px;
   grid-column-gap: 18px;
 }
+.control_table_item_7col{
+  display: grid;
+  grid-template-columns: auto 150px auto 150px 150px 150px 150px;
+  overflow: hidden;
+  grid-column-gap: 18px;
+}
 .control_table_item_5col{
   display: grid;
   grid-template-columns: auto 200px auto 200px 200px;
@@ -36,7 +42,7 @@
 }
 .control_table_item_9col{
   display: grid;
-  grid-template-columns: auto 110px 110px 110px 110px 110px 110px 110px 110px;
+  grid-template-columns: auto 90px 90px 90px 90px 90px 90px 90px 90px;
   grid-column-gap: 18px;
 }
 .control_table_item_9col .controllabel{
@@ -77,13 +83,14 @@
   font-weight: bold;
   cursor: pointer;
 }
+
 .control_btn:hover{
   /*  background-color: #5c6d7e;
   */
 }
 .control_btn_rech{
   padding: 8;
-  width: 200px;
+  width: 150px;
 }
 .control_btn_pdf{
   text-align: center;

@@ -22,13 +22,14 @@
 .sidebarlistitem{
   height: auto;
   display: grid;
-  grid-row-gap: 4px;
 }
 .sidebaritem{
   text-decoration: none;
   color: white;
   font-size: 22px;
+  padding: 4px;
 }
+
 .sidebaritem div{
   padding: 8px;
   display: grid;
@@ -52,4 +53,20 @@
 #sidebarcheckbox{
   position: absolute;
   opacity: 0;
+}
+.sidebar_submenu{
+  background-color: #34495e;
+  display: none;
+  overflow: hidden;
+  transition: .2s;
+}
+.sidebar_submenu ul{
+  margin-left: 48px;
+  list-style: none;
+}
+.sidebar_submenu a{
+  text-decoration: none;
+  color: white;
+  font-size: 22px;
+  vertical-align: 6px;
 }
