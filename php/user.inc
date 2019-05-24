@@ -5,14 +5,16 @@ class user{
   public $prenom;
   public $profession;
   public $email;
+  public $username;
   public $password;
-  public function __construct($id,$nom,$prenom,$profession,$email,$password)
+  public function __construct($id,$nom,$prenom,$profession,$email,$username,$password)
   {
     $this->id=$id;
     $this->nom=$nom;
     $this->prenom=$prenom;
     $this->profession=$profession;
     $this->email=$email;
+    $this->username=$username;
     $this->password=$password;
   }
   public function InsertUser()
@@ -32,7 +34,7 @@ class user{
       $_SESSION["nomprenom"]=$this->nom." ".$this->prenom;
     $_SESSION["username"]=$this->email;
     $database->query("UPDATE `user` SET `nom`='$this->nom',`prenom`='$this->prenom'
-          ,`email`='$this->email' ,`profession`='$this->profession'
+          ,`email`='$this->email', `username`='$this->username' ,`profession`='$this->profession'
            $sql_password  WHERE id_user=$this->id ");
   }
 }

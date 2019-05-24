@@ -7,6 +7,9 @@ require 'php/Vehicule.inc';
 require 'php/Statistique.inc';
 $database=new database();
 require 'php/VerifierUser.php';
+if(isset($_GET["id_journee_delete"])){
+  $database->query("delete from journee where id_journee=".$_GET["id_journee_delete"]);
+}
 if(isset($_GET["PDF"])){
   header("location: BonEcartePDF.php?idVendeur=".$_GET["idVendeur"]."&depart=".$_GET["depart"]."&jusque=".$_GET["jusque"]."");
 }
@@ -64,7 +67,7 @@ while ($row=mysqli_fetch_assoc($result)) {
     </script>
   </head>
   <body onload="<?php if(isset($_GET["idVendeur"])){ ?>
-         Tab('<?php if(isset($_GET["page"])){echo "Statistique";}else{echo 'Information';} ?>')
+         Tab('<?php if(isset($_GET["page"])){echo "journee";}else{echo 'Information';} ?>')
          <?php } ?>">
     <?php NavBar(); ?>
     <div class="page">
@@ -193,6 +196,9 @@ while ($row=mysqli_fetch_assoc($result)) {
                           </a>
                           <a href="BonjourneePDF.php?id_journee=<?php echo $value->id; ?>" class="produitbtn produitbtnsupprime">
                             PDF
+                          </a>
+                          <a href="VendeurControle.php?idVendeur=<?php if(isset($_GET["idVendeur"])) echo $_GET["idVendeur"]; ?>&id_journee_delete=<?php echo $value->id; ?>&page=1" onclick="return confirm('vous les vous vrement supprimer')" class="produitbtn produitbtnsupprime">
+                            Supprimer
                           </a>
                         </td>
                       </tr>

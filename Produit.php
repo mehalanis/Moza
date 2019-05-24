@@ -48,6 +48,7 @@ while ($row=mysqli_fetch_assoc($result)) {
           <div class="bartable">
               <a href="ProduitControle.php"><img src="img/icon/add32pxgreen.png" alt=""></a>
               <button type="submit" class="btn_remove_all" name="button"><img src="img/icon/remove32px.png" alt=""></button>
+              <a href="BonProduitPDF.php"><img src="img/icon/pdf32px.png" alt=""></a>
           </div>
           <div class="divtable">
             <div class="barrecherche">

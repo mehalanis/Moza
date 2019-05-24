@@ -81,8 +81,8 @@ $txt.="<tr   nobr=\"true\"><th width=\"150\">Nom</th><th>qte Vendue</th><th>Bene
 while ($row= mysqli_fetch_assoc($result)) {
   $somme=$row["qte_vendue"]*$row['benefice'];
   $total+= $somme;
-  $txt.="<tr  nobr=\"true\"><td >".$row["nom"]."</td><td>".$row["qte_vendue"]."</td><td>".$row['benefice']."</td>
-  <td>".$somme."</td></tr>";
+  $txt.="<tr  nobr=\"true\"><td >".$row["nom"]."</td><td>".$row["qte_vendue"]."</td><td>".$row['benefice']." DA</td>
+  <td>".$somme." DA</td></tr>";
   $y+=10;
 }
 $txt.="</table>";

@@ -28,7 +28,7 @@
 }
 .control_table_item_7col{
   display: grid;
-  grid-template-columns: auto 150px auto 150px 150px 150px 150px;
+  grid-template-columns: auto 170px auto 170px 150px 150px 150px;
   overflow: hidden;
   grid-column-gap: 18px;
 }
@@ -37,7 +37,7 @@
   grid-template-columns: auto 200px auto 200px 200px;
   grid-column-gap: 18px;
 }
-.control_table_item_5col label,.control_table_item_6col label{
+.control_table_item_5col label,.control_table_item_6col label,.control_table_item_7col label{
   font-size: 22px;
 }
 .control_table_item_9col{

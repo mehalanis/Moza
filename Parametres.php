@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <?php
 require 'php/Standard.php';
 require 'php/database.inc';
@@ -6,12 +6,12 @@ require 'php/user.inc';
 require 'php/VerifierUser.php';
 $database=new database();
 if (isset($_POST["Modifier"])) {
-  $user=new user($_POST["id_user"],$_POST["nom"],$_POST["prenom"],$_POST["profession"],$_POST["email"],$_POST["password"]);
+  $user=new user($_POST["id_user"],$_POST["nom"],$_POST["prenom"],$_POST["profession"],$_POST["email"],$_POST["username"],$_POST["password"]);
   $user->UpdateUser();
 }
 $result=$database->query("select * from user where id_user=".$_SESSION['id_user']);
 $row=mysqli_fetch_assoc($result);
-$user=new user($row["id_user"],$row["nom"],$row["prenom"],$row["profession"],$row["email"],$row["password"])
+$user=new user($row["id_user"],$row["nom"],$row["prenom"],$row["profession"],$row["email"],$row["username"],$row["password"])
 ?>
 <html lang="en" dir="ltr">
   <head>
@@ -56,6 +56,10 @@ $user=new user($row["id_user"],$row["nom"],$row["prenom"],$row["profession"],$ro
                 <div class="control_table_item">
                   <label class="controllabel" for="" >Email</label>
                   <input type="text" name="email" value="<?php echo $user->email; ?>" class="controlinput">
+                </div>
+                <div class="control_table_item">
+                  <label class="controllabel" for="" >UserName</label>
+                  <input type="text" name="username" value="<?php echo $user->username; ?>" class="controlinput">
                 </div>
                 <div class="control_table_item">
                   <label class="controllabel" for="" >Mot de passe</label>

@@ -1,6 +1,8 @@
 function calculCharge(id,value) {
   var charge=document.getElementById("qte_charge_"+id);
   var init=document.getElementById("qte_init_"+id);
+  var sortie=document.getElementById("qte_sortie_"+id);
+  collVide(sortie);
   charge.value=parseInt(init.value)+parseInt(value);
   calculRetoune(id);
 }

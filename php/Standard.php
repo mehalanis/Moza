@@ -11,6 +11,10 @@ function NavBar()
 {
 	include 'html/navbar.html';
 }
+function testEmpty($v)
+{
+  if(empty($v)){ return 0;}else{ return $v;}
+}
 function printitem($id,$page,$style,$get){
    echo "<li class='$style'><a href='$page?".$get."page=$id'>$id</a></li>";
 }

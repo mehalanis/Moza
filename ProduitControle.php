@@ -64,7 +64,7 @@ while ($row=mysqli_fetch_assoc($result)) {
       <div class="detail">
         <div class="titre_bar">
           <label for="" class="titre_bar_label">
-            <a href="produitControle.php"><img src="img/icon/back_bleu_40px.png" alt=""></a>
+            <a href="produit.php"><img src="img/icon/back_bleu_40px.png" alt=""></a>
              Produit
           </label>
         </div>

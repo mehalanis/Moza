@@ -11,6 +11,7 @@ function SwitchSideBar() {
   var side_bar_user_info=document.getElementById("sidebaruserinfo");
   if(side_bar_user_info.style.opacity=="1"){
     SideMini();
+    CloseSubMenu();
   }else{
     Sidegrande();
   }
@@ -22,8 +23,8 @@ function OpenSubMenu(nom) {
   }
 }
 function CloseSubMenu() {
-  var list_submenu=document.getElementsByClassName("sidebar_submenu");
-  for (var i = 0; i < list_submenu.length; i++) {
-  list_submenu[i].className="sidebar_submenu ";
+  var dropdown = document.getElementsByClassName("dropdown-container");
+  for (var i = 0; i < dropdown.length; i++) {
+    dropdown[i].style.display="none";
   }
 }

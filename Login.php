@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <?php
 require 'php/database.inc';
 require 'php/user.inc';
@@ -9,7 +9,7 @@ if(isset($_POST["exit"])){
 }
 if(isset($_POST["button"])){
 
-$result=$database->query("select * from user where email='".$_POST['username']."' and password='".md5($_POST['password'])."'");
+$result=$database->query("select * from user where username='".$_POST['username']."' and password='".md5($_POST['password'])."'");
 $cpt=0;
 while ($row=mysqli_fetch_assoc($result)) {
   $cpt++;  $info=$row;
